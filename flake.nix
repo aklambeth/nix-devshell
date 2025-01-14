@@ -20,8 +20,10 @@
         inherit system;
         config.allowUnfree = true;
       };
+
     in {
-      devShells = default (system: 
+
+      devShells = forAllSystems (system: 
         let
           pkgs = pkgsForSystem system;
         in {
@@ -40,6 +42,7 @@
             '';
           };
           # You can add more named devShells here
+          
         }
       );
     };
