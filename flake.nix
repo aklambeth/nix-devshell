@@ -42,6 +42,16 @@
             '';
           };
           # You can add more named devShells here
+
+          astro = pkgs.mkShell {
+            packages = with pkgs; [
+              nodejs_23
+              yarn
+              
+            ];
+          };
+          # You can add more named devShells here
+
           
         }
       );
