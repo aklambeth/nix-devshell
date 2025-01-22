@@ -43,9 +43,9 @@
           };
           # You can add more named devShells here
 
-          astro = pkgs.mkShell {
+          node = pkgs.mkShell {
             packages = with pkgs; [
-              nodejs_23
+              nodejs_22
               yarn
               
             ];
