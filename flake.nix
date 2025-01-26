@@ -52,6 +52,17 @@
           };
           # You can add more named devShells here
 
+          mcp = pkgs.mkShell {
+            packages = with pkgs; [
+              nodejs_22
+              yarn
+              python313
+              python312Packages.pip
+              uv
+            ];
+          };
+          # You can add more named devShells here
+
           
         }
       );
