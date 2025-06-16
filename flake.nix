@@ -47,7 +47,7 @@
             packages = with pkgs; [
               nodejs_22
               yarn
-              
+              git
             ];
           };
           # You can add more named devShells here
@@ -59,11 +59,26 @@
               python313
               python312Packages.pip
               uv
+              git
             ];
           };
           # You can add more named devShells here
 
-          
+          docker = pkgs.mkShell {
+            packages = with pkgs; [
+              docker
+              docker-compose
+              lazydocker
+            ];
+          };
+
+          ollama = pkgs.mkShell {
+            packages = with pkgs; [
+              ollama
+            ];
+          };
+
+          # You can add more named devShells here
         }
       );
     };
