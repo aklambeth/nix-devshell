@@ -48,6 +48,7 @@
               nodejs_22
               yarn
               git
+              gh
             ];
           };
           # You can add more named devShells here
