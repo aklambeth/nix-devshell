@@ -30,6 +30,10 @@
           default = pkgs.mkShell {
             packages = with pkgs; [
               zsh
+              ansible
+              git
+              gh
+              opentofu
             ];
             shellHook = ''
               # Check if zsh is installed and set it as the default shell
@@ -80,6 +84,8 @@
           };
 
           # You can add more named devShells here
+
+
         }
       );
     };
