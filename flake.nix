@@ -60,11 +60,14 @@
           mcp = pkgs.mkShell {
             packages = with pkgs; [
               nodejs_22
+              ansible
+              claude-code
               yarn
               python313
               python312Packages.pip
               uv
               git
+              gh 
             ];
           };
           # You can add more named devShells here
