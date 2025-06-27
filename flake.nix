@@ -31,6 +31,7 @@
             packages = with pkgs; [
               zsh
               ansible
+              claude-code
               git
               gh
               opentofu
@@ -50,6 +51,7 @@
           node = pkgs.mkShell {
             packages = with pkgs; [
               nodejs_22
+              claude-code
               yarn
               git
               gh
