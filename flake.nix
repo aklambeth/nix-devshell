@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
 
-  outputs = { self, nixpkgs }: 
+  outputs = { self, nixpkgs }:
     let
       # Helper function to create system-specific pkgs
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -14,7 +14,7 @@
         "aarch64-darwin"
         "x86_64-darwin"
       ];
-      
+
       # Import pkgs for each system
       pkgsForSystem = system: import nixpkgs {
         inherit system;
@@ -23,7 +23,7 @@
 
     in {
 
-      devShells = forAllSystems (system: 
+      devShells = forAllSystems (system:
         let
           pkgs = pkgsForSystem system;
         in {
@@ -48,6 +48,57 @@
           };
           # You can add more named devShells here
 
+          python = pkgs.mkShell {
+            name = "python-dev";
+
+            buildInputs = with pkgs; [
+              # Python 3.13
+              python313
+
+              # GitHub CLI
+              gh
+
+              # Python packages
+              python313Packages.mkdocs-material
+
+              # Modern Python package management tools
+              pipx
+              uv
+
+              # Traditional Python tools
+              python313Packages.pip
+              python313Packages.virtualenv
+            ];
+
+            shellHook = ''
+              echo "🐍 Python Development Shell"
+              echo "Python version: $(python --version)"
+              echo "GitHub CLI version: $(gh --version | head -n1)"
+              echo "UV version: $(uv --version)"
+              echo "Pipx version: $(pipx --version)"
+              echo "MkDocs Material available"
+              echo ""
+              echo "Available commands:"
+              echo "  python    - Python 3.13 interpreter"
+              echo "  uv        - Ultra-fast Python package installer"
+              echo "  pipx      - Install and run Python applications in isolated environments"
+              echo "  pip       - Traditional package installer"
+              echo "  mkdocs    - MkDocs documentation generator"
+              echo "  gh        - GitHub CLI"
+              echo ""
+              echo "Quick start:"
+              echo "  uv venv .venv          # Create virtual environment with uv"
+              echo "  source .venv/bin/activate  # Activate virtual environment"
+              echo "  pipx install <package> # Install Python app globally"
+              echo ""
+            '';
+
+            # Environment variables
+            PYTHONPATH = "${pkgs.python313Packages.mkdocs-material}/${pkgs.python313.sitePackages}";
+          };
+
+          # You can add more named devShells here
+          #
           node = pkgs.mkShell {
             packages = with pkgs; [
               nodejs_24
@@ -63,14 +114,12 @@
           mcp = pkgs.mkShell {
             packages = with pkgs; [
               nodejs_22
-              ansible
-              claude-code
               yarn
               python313
               python312Packages.pip
               uv
               git
-              gh 
+              gh
             ];
           };
           # You can add more named devShells here
