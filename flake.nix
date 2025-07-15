@@ -52,24 +52,20 @@
             name = "python-dev";
 
             buildInputs = with pkgs; [
-              # Python 3.13
-              python313
+                # Python 3.13 with properly integrated packages
+                (python313.withPackages (ps: with ps; [
+                  pip
+                  virtualenv
+                ]))
 
-              # GitHub CLI
-              git
-              gh
+                # GitHub CLI
+                git
+                gh
 
-              # Python packages
-              python313Packages.mkdocs-material
-
-              # Modern Python package management tools
-              pipx
-              uv
-
-              # Traditional Python tools
-              python313Packages.pip
-              python313Packages.virtualenv
-            ];
+                # Modern Python package management tools
+                pipx
+                uv
+              ];
 
             shellHook = ''
               echo "🐍 Python Development Shell"
@@ -84,7 +80,6 @@
               echo "  uv        - Ultra-fast Python package installer"
               echo "  pipx      - Install and run Python applications in isolated environments"
               echo "  pip       - Traditional package installer"
-              echo "  mkdocs    - MkDocs documentation generator"
               echo "  gh        - GitHub CLI"
               echo ""
               echo "Quick start:"
