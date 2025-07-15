@@ -56,6 +56,7 @@
               python313
 
               # GitHub CLI
+              git
               gh
 
               # Python packages
