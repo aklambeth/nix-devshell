@@ -63,7 +63,6 @@
                 gh
 
                 # Modern Python package management tools
-                pipx
                 uv
               ];
 
@@ -85,7 +84,6 @@
               echo "Quick start:"
               echo "  uv venv .venv          # Create virtual environment with uv"
               echo "  source .venv/bin/activate  # Activate virtual environment"
-              echo "  pipx install <package> # Install Python app globally"
               echo ""
             '';
 
