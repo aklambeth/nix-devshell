@@ -96,7 +96,8 @@
           node = pkgs.mkShell {
             packages = with pkgs; [
               nodejs_24
-	      typescript
+              pkgs.pnpm_10_29_2
+              typescript
               claude-code
               yarn
               git
